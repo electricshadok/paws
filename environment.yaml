@@ -1,0 +1,28 @@
+name: paws
+channels:
+  - pytorch
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pytorch=2.2.*
+  - torchvision=0.17.*
+  - torchaudio=2.2.*
+  - pip
+  - jax
+  - pip:
+    - ruff
+    - mujoco
+    - gymnasium[mujoco]
+    - timm
+    - gymnasium-robotics
+    - stable-baselines3
+    - tensorboard
+    - robot_descriptions
+    - hydra-core
+    - warp-lang
+    # - opencv-python
+    # - pytorchrl
+    # - imitation
+    # - openpose # Requires manual installation or build from source on Mac
+   #  - git+https://github.com/TRI-ML/prismatic-vlms.git
+   # - https://github.com/google-deepmind/mujoco_menagerie

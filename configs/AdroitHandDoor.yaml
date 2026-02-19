@@ -1,0 +1,74 @@
+defaults:
+  - _self_
+
+experiment_name: android_hand_door
+
+env:
+  _target_: paws.components.rewards.TouchDoorReward
+  env:
+    _target_: gymnasium.make
+    id: AdroitHandDoor-v1
+    render_mode: null
+
+model:
+  _target_: stable_baselines3.PPO
+  policy: MlpPolicy
+  verbose: 1
+  tensorboard_log: logs/${experiment_name}
+  device: auto
+  _convert_: partial
+
+  # --- Common Hyperparameters ---
+  
+  # Learning rate (can be a float or a schedule function)
+  learning_rate: 3.0e-4
+  
+  # Number of steps to run for each environment per update
+  # (Total buffer size = n_steps * n_envs)
+  n_steps: 2048
+  
+  # Minibatch size for gradient updates
+  batch_size: 64
+  
+  # Number of epochs when optimizing the surrogate loss
+  n_epochs: 10
+  
+  # Discount factor (0.99 is standard, lower for short horizons)
+  gamma: 0.99
+  
+  # Factor for trade-off of bias vs variance for Generalized Advantage Estimator
+  gae_lambda: 0.95
+  
+  # Clipping parameter, essential for PPO ensuring updates aren't too large
+  clip_range: 0.2
+  
+  # Entropy coefficient: Higher values encourage exploration
+  # (Try 0.01 or 0.05 if the agent gets stuck in local optima)
+  ent_coef: 0.0
+  
+  # Value function coefficient: Scales the loss of the value function
+  vf_coef: 0.5
+  
+  # Max gradient norm: Clips gradients to prevent exploding gradients
+  max_grad_norm: 0.5
+  
+  # Limit the KL divergence between updates (useful for stability)
+  # target_kl: null
+
+  # --- Network Architecture Customization ---
+  
+  # Custom policy network architecture
+  # pi: policy network (actor), vf: value function network (critic)
+  policy_kwargs:
+    net_arch:
+      pi: [64, 64]
+      vf: [64, 64]
+    # activation_fn: torch.nn.Tanh  # Default is Tanh, usually good for continuous control
+
+
+training:
+  timesteps: 100000
+  model_dir: models/${experiment_name}
+
+evaluation:
+  run_name: null
