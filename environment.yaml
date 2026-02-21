@@ -10,19 +10,34 @@ dependencies:
   - pip
   - jax
   - pip:
-    - ruff
-    - mujoco
-    - gymnasium[mujoco]
+    # --- Deep Learning / ML ---
     - timm
+    
+    # --- Reinforcement Learning / Robotics Environments ---
+    - gymnasium[mujoco]
     - gymnasium-robotics
-    - stable-baselines3
-    - tensorboard
+    - dm_control
+    - metaworld
+    - minigrid
     - robot_descriptions
-    - hydra-core
+
+    # --- RL Algorithms ---
+    - stable-baselines3
+
+    # --- Compute / Simulation ---
+    - mujoco
     - warp-lang
+
+    # --- Utilities (Config, Logging, Linting) ---
+    - hydra-core
+    - tensorboard
+    - ruff
+
+    # --- Commented / Unused / External ---
     # - opencv-python
     # - pytorchrl
     # - imitation
     # - openpose # Requires manual installation or build from source on Mac
-   #  - git+https://github.com/TRI-ML/prismatic-vlms.git
-   # - https://github.com/google-deepmind/mujoco_menagerie
+    # - git+https://github.com/TRI-ML/prismatic-vlms.git
+    # - https://github.com/google-deepmind/mujoco_menagerie
+    # - git+https://github.com/stepjam/RLBench.git
