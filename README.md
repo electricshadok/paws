@@ -4,6 +4,13 @@
 
 Paws is an experimental sandbox dedicated to mastering modern practices in Physical AI and Reinforcement Learning. This repository serves as a modular playground for testing agent behaviors across various simulation technologies.
 
+**Goal-Conditioned Reinforcement Learning.**
+
+- FetchPickAndPlace-v4), this dictionary structure is the hallmark of Goal-Conditioned Reinforcement Learning.
+
+- ...
+
+
 ## Quick Start
 
 Create the environment:
@@ -16,20 +23,6 @@ conda activate paws
 ## Commands
 
 This project includes setup for the **Adroit Hand** environment (Door task).
-
-### Visualization
-Run the visualization script to verify the environment setup.
-```bash
-python paws/scripts/visualize_env.py --config configs/AdroitHandDoor.yaml
-python paws/scripts/visualize_env.py --config configs/FetchPickAndPlace.yaml
-```
-
-### Inspection
-Inspect the environment observations, rewards, and agent architecture:
-```bash
-python paws/scripts/inspect_agent.py --config configs/AdroitHandDoor.yaml
-python paws/scripts/inspect_agent.py --config configs/FetchPickAndPlace.yaml
-```
 
 ### Training
 Train an agent
@@ -48,6 +41,20 @@ Watch the trained agent in action:
 ```bash
 python paws/scripts/eval.py --config configs/AdroitHandDoor.yaml
 python paws/scripts/eval.py --config configs/FetchPickAndPlace.yaml
+```
+
+### Visualization
+Run the visualization script to verify the environment setup.
+```bash
+python paws/scripts/visualize_env.py --config configs/AdroitHandDoor.yaml
+python paws/scripts/visualize_env.py --config configs/FetchPickAndPlace.yaml
+```
+
+### Inspection
+Inspect the environment observations, rewards, and agent architecture:
+```bash
+python paws/scripts/inspect_agent.py --config configs/AdroitHandDoor.yaml
+python paws/scripts/inspect_agent.py --config configs/FetchPickAndPlace.yaml
 ```
 
 ---

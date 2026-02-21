@@ -3,7 +3,7 @@ import os
 
 import gymnasium as gym
 import gymnasium_robotics
-from hydra.utils import get_class, instantiate
+from hydra.utils import instantiate
 from omegaconf import DictConfig, OmegaConf
 
 
@@ -44,27 +44,20 @@ def get_trained_model_path(cfg: DictConfig) -> str:
 def evaluate(cfg: DictConfig):
     # Instantiate the environment
     # Override render_mode to human for visualization
-    if "env" in cfg.env and "render_mode" in cfg.env.env:
+    if "render_mode" in cfg.env:
+        cfg.env.render_mode = "human"
+    elif "env" in cfg.env and "render_mode" in cfg.env.env:
         cfg.env.env.render_mode = "human"
 
     gym.register_envs(gymnasium_robotics)
     env = instantiate(cfg.env)
 
-    try:
-        model_path = get_trained_model_path(cfg)
-    except FileNotFoundError as e:
-        print(e)
-        return
+    model_path = get_trained_model_path(cfg)
 
-    # Resolve the model class
-    # The config has model: {_target_: stable_baselines3.PPO, ...}
-    try:
-        model_class = get_class(cfg.model._target_)
-        model = model_class.load(model_path)
-        print("Loaded model. Press Ctrl+C to stop.")
-    except Exception as e:
-        print(f"Failed to load model: {e}")
-        return
+    # Instantiate the model to resolve the correct class, then load the trained weights
+    model = instantiate(cfg.model, env=env)
+    model = model.__class__.load(model_path, env=env)
+    print("Loaded model. Press Ctrl+C to stop.")
 
     obs, info = env.reset()
 

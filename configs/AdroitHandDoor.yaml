@@ -1,6 +1,3 @@
-defaults:
-  - _self_
-
 experiment_name: android_hand_door
 
 env:
