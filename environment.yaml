@@ -16,6 +16,7 @@ dependencies:
     # --- Reinforcement Learning / Robotics Environments ---
     - gymnasium[mujoco]
     - gymnasium-robotics
+    - panda-gym
     - dm_control
     - metaworld
     - minigrid
@@ -41,3 +42,4 @@ dependencies:
     # - git+https://github.com/TRI-ML/prismatic-vlms.git
     # - https://github.com/google-deepmind/mujoco_menagerie
     # - git+https://github.com/stepjam/RLBench.git
+    # - add Netown (Nvidia)
